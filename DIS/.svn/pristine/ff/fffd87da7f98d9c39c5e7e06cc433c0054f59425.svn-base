@@ -1,0 +1,138 @@
+LOevents 1
+numevts 20000        ! number of events to be generated
+ ih1 12
+ih2  1               ! hadron 2 (1 for protons, -1 for antiprotons)
+ebeam1 27.6d0         ! energy of beam 1 (electron)
+ebeam2 920d0
+bornktmin 0d0       ! (default 0d0) Generation cut: minimum kt in underlying Born
+bornsuppfact 0d0  ! (default 0d0) Mass parameter for Born suppression factor.
+                     ! If < 0 suppfact = 1.
+Qmin 10d0
+Qmax 250d0
+xmin 0d0
+xmax 1d0
+ymin 0d0
+ymax 1d0
+
+
+q2suppr 200d0
+
+! To be set only if using LHA pdfs
+! 10050 cteq6m
+lhans1   275200
+lhans2   275200    ! pdf set for hadron 2 (LHA numbering)	
+
+
+alphas_from_pdf 1
+
+! To be set only if using different pdf sets for the two incoming hadrons
+!QCDLambda5  0.255    ! for not equal pdf sets 
+
+renscfact  1d0      ! (default 1d0) ren scale factor: muren  = muref * renscfact 
+facscfact  1d0      ! (default 1d0) fac scale factor: mufact = muref * facscfact 
+
+! Parameters to allow or not the use of stored data
+use-old-grid    1    ! If 1 use old grid if file pwggrids.dat is present (<> 1 regenerate)
+use-old-ubound  1    ! If 1 use norm of upper bounding function stored
+                     ! in pwgubound.dat, if present; <> 1 regenerate
+ 
+! A typical call uses 1/1400 seconds (1400 calls per second)
+ncall1 50000         ! No. calls for the construction of the importance sampling grid
+itmx1 1              ! No. iterations for grid: total 100000 calls ~ 70 seconds
+ncall2 100000         ! No. calls for the computation of the upper bounding
+                     ! envelope for the generation of radiation
+itmx2 1              ! No. iterations for the above
+
+! Notice: the total number of calls is ncall2*itmx2*foldcsi*foldy*foldphi
+! these folding numbers yield a negative fraction of 0.5% with bornktmin=10 GeV.
+! With these settings: ncall2*itmx2*foldcsi*foldy*foldphi=5M, 60 minutes
+foldcsi 1            ! No. folds on csi integration
+foldy   1            ! No. folds on  y  integration
+foldphi 1            ! No. folds on phi integration
+
+nubound 20000       ! No. calls to set up the upper bounding norms for radiation.
+                     ! This is performed using only the Born cross section (fast)
+iupperfsr 1
+
+fastbtlbound 1
+storemintupb 1
+ubexcess_correct 1
+storeinfo_rwgt 1   ! store info to allow for reweighting
+hdamp 0
+bornzerodamp  1
+
+! OPTIONAL PARAMETERS
+
+withnegweights 1     ! (default 0). If 1 use negative weights.
+#bornonly 0          ! (default 0). If 1 compute underlying Born using LO
+                     ! cross section only.
+#btildeborn 1
+#btildevirt 1
+#btildecoll 1
+#btildereal 1
+#softmismch 1
+flg_jacsing 1
+testplots  1        ! (default 0, do not) do NLO and PWHG distributions
+#withdamp 0
+#withsubtr 1
+
+xupbound 2d0        ! increase upper bound for radiation generation
+
+iseed    12          ! Start the random number generator with seed iseed
+#rand1     0         ! skipping  rand2*100000000+rand1 numbers (see RM48
+#rand2     0         ! short writeup in CERNLIB).              
+manyseeds 1         ! Used to perform multiple runs with different random
+                     ! seeds in the same directory.
+                     ! If set to 1, the program asks for an integer j;
+                     ! The file pwgseeds.dat at line j is read, and the
+                     ! integer at line j is used to initialize the random
+                     ! sequence for the generation of the event.
+                     ! The event file is called pwgevents-'j'.lhe
+
+doublefsr 0          ! Default 0; if 1 use new mechanism to generate regions
+                     ! such that the emitted harder than the
+                     ! emitter in FSR is suppressed. If doublefsr=0 this is
+                     ! only the case for emitted gluons (old behaviour). If
+                     ! 1 it is also applied to emitted quarks.
+                     ! If set, it strongly reduces spikes on showered output.
+
+
+runningscales 1
+
+olddij 0
+
+channel_type 4 ! full NC = 4; CC = 3;
+vtype 3 ! 1: photon exchange only, 2: Z exchange only, 3: photon+Z exchange
+smartsig 1
+nores 1
+
+#polarisation 1 !   0 = default, 1 = polarised DIS
+
+parallelstage 1
+xgriditeration 1
+
+
+#######################################
+### Multiple weights (scale vars) #####
+#######################################
+rwl_file '-' ! If set to '-' read the xml reweighting info from this same file. Otherwise, it specifies the xml file with weight information
+<initrwgt>
+<weight id='1'>default</weight> 
+<weight id='2' > renscfact=2d0 facscfact=2d0 </weight>
+<weight id='3' > renscfact=0.5d0 facscfact=0.5d0 </weight>
+<weight id='4' > renscfact=1d0 facscfact=2d0 </weight>
+<weight id='5' > renscfact=1d0 facscfact=0.5d0 </weight>
+<weight id='6' > renscfact=2d0 facscfact=1d0 </weight>
+<weight id='7' > renscfact=0.5d0 facscfact=1d0 </weight>
+</initrwgt>
+rwl_group_events 10  ! It keeps 10 events in memory, reprocessing them together for reweighting (see README.Compress-And-Weights) (default 1000)
+lhapdf6maxsets 10     ! Maximum number of lhapdf6 sets that it can keep in memory (see README.Compress-And-Weights) (default 10)
+
+
+py8QED 0
+py8MPI 1
+py8had 2
+py8shower 1
+
+colltest 0
+softtest 0

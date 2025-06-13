@@ -1,0 +1,65 @@
+Born.f
+Born_phsp.f
+      real*8 powheginput,sqrts,theta,phi,cost,sint
+         Q2min = (powheginput('Qmin'))**2
+         Q2max = (powheginput('Qmax'))**2
+         xmin = powheginput('xmin')
+         xmax = powheginput('xmax')
+         ymin = powheginput('ymin')
+         ymax = powheginput('ymax')
+      real *8, external :: dotp, powheginput
+         q2suppr = max(powheginput("#bornsuppfact"), 0d0)
+      real *8, external :: dotp, powheginput
+         q2suppr = max(powheginput("#bornsuppfact"), 0d0)
+      real * 8, external:: powheginput
+      runningscales = (powheginput('#runningscales').ne.0)
+      real*8, external:: powheginput, dotp
+ProcessCitation.f
+convert_coup.f
+      double precision powheginput
+      external powheginput
+init_couplings.f
+      real * 8 powheginput
+      external powheginput
+      flg_tiny_alphas = (powheginput("#tiny_alphas")==1d0)
+      vtype =  powheginput("vtype")
+      ph_topmass = powheginput("#topmass")
+      ph_Zmass = powheginput("#Zmass")
+      ph_Zwidth = powheginput("#Zwidth")
+      ph_Wmass = powheginput("#Zmass")
+      ph_Wwidth = powheginput("#Zwidth")
+      ph_alphaem = powheginput("#alphaem")
+init_processes.f
+      real * 8 powheginput
+      external powheginput
+      pdf_nparton = abs(powheginput("ih1"))
+      lflav = powheginput("ih1")
+      flg_dis_isr = (powheginput("#flg_dis_isr").eq. 1)
+      flg_dis_fsr = (powheginput("#flg_dis_fsr").eq. 1)
+      if (powheginput("#flg_dis").eq. 1) then
+       if(powheginput('channel_type').gt.0) then
+          channel_type =powheginput('channel_type')
+       only_g_inc = (powheginput("#only_g_inc") .eq. 1)
+       only_q_inc = (powheginput("#only_q_inc") .eq. 1)
+pwhg_analysis.f
+      real*8 powheginput
+      Q2min=(powheginput('Qmin'))**2
+      Q2max=(powheginput('Qmax'))**2
+      ymin = Q2min/(kn_sbeams * powheginput('xmax'))
+      ymax = Q2max/(kn_sbeams * powheginput('xmin'))
+      real * 8 powheginput,random, brd_Ze, qevsh(4,0:4), obsf77, brd_tE
+      external powheginput,random
+pwhg_analysis_H1_2006.f
+pwhg_analysis_caesar.f
+pwhg_analysis_eic.f
+pwhg_analysis_inclusive_sigma.f
+pwhg_analysis_jets.f
+pwhg_analysis_vbf.f
+real.f
+save.f
+virtual.f
+      real *8 powheginput
+      external powheginput 
+         fakevirt=powheginput("#fakevirt")
+         if(powheginput("#parallelstage")<2) then
+         fakevirt=powheginput("#fakevirt")
