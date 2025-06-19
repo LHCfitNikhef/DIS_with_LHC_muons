@@ -9,4 +9,6 @@ the FASER experiment carried out in [2]
 
 [2] Reinaldo Francener, Victor P. Goncalves, Felix Kling, 
     Peter Krack and Juan Rojo, "Deep-Inelastic Scattering at TeV 
-    Energies with LHC Muons", arXiv:2506:XXXXX
+    Energies with LHC Muons", arXiv:2506:13889
+
+
